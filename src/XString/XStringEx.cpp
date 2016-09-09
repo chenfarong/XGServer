@@ -1,6 +1,24 @@
 ﻿
 #include "XStringEx.h"
-#include <iostream>
+
+#include <iostream>     // std::cout
+#include <algorithm>    // std::transform
+#include <vector>       // std::vector
+#include <functional>   // std::plus
+#include <ctype.h>
+#include <stdexcept>
+#include <iterator>
+
+#include <sstream>
+#include <algorithm>
+#include <string>
+#include <string.h>
+#include <cstdlib>
+#include <cstdio>
+#include <vector>
+#include <time.h>
+#include <stdarg.h>
+#include <stdint.h>
 
 using namespace std;
 
@@ -544,16 +562,32 @@ bool XTokenizer::FirstTokenIs(const std::string& keyname)
 	return s.compare(keyname)==0;
 }
 
+/*
+ void ToUpperString(string &str)
+{
+    transform(str.begin(), str.end(), str.begin(), (int (*)(int))toupper);
+}
+void ToLowerString(string &str)
+{
+    transform(str.begin(), str.end(), str.begin(), (int (*)(int))tolower);
+}
+ */
+
+inline void strToLower(std::string& str)
+{
+	std::transform(str.begin(), str.end(), str.begin(), (int (*)(int))tolower);
+}
+
 bool XTokenizer::FirstTokenIsIcase(const std::string & keyname)
 {
 	if (size()<1) return false;
 	string s = TokenClear(at(0));
-	//strToLower(s);
-	std::transform(s.begin(), s.end(), s.begin(), tolower);
+	strToLower(s);
+//	std::transform(s.begin(), s.end(), s.begin(), tolower);
 
 	string s1 = keyname;
-	//strToLower(s1);
-	std::transform(s1.begin(), s1.end(), s1.begin(), tolower);
+	strToLower(s1);
+//	std::transform(s1.begin(), s1.end(), s1.begin(), tolower);
 	return s.compare(s1) == 0;
 }
 
