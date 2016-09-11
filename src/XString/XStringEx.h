@@ -362,5 +362,14 @@ public:
 
 };
 
+namespace XStringUtil
+{
+	bool utf8CharToUcs2Char(const char* utf8Tok, wchar_t* ucs2Char, unsigned int* utf8TokLen);
+	void ucs2CharToUtf8Char(const wchar_t ucs2Char, char* utf8Tok);
+	std::wstring utf8ToUcs2(const std::string& utf8Str);
+	std::string ucs2ToUtf8(const std::wstring& ucs2Str);
+};
+
+
 
 #endif
