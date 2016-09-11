@@ -147,6 +147,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\StrUtil.cpp" />
+    <ClCompile Include="..\utf8util.cpp" />
     <ClCompile Include="..\XStringEx.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>

@@ -1,4 +1,4 @@
-
+﻿
 
 #include "utf8util.h"
 
@@ -6,16 +6,16 @@ namespace utf8util
 {
 int IsTextUTF8(const char* str, ULONGLONG length)
 {
-	ULONGLONG i;
-	DWORD nBytes = 0;//UFT8����1-6���ֽڱ���,ASCII��һ���ֽ�
+	int i;
+	DWORD nBytes = 0;//UFT8可用1-6个字节编码,ASCII用一个字节
 	UCHAR chr;
-	BOOL bAllAscii = TRUE; //���ȫ������ASCII, ˵������UTF-8
+	BOOL bAllAscii = TRUE; //如果全部都是ASCII, 说明不是UTF-8
 	for (i = 0; i < length; i++)
 	{
 		chr = *(str + i);
-		if ((chr & 0x80) != 0) // �ж��Ƿ�ASCII����,�������,˵���п�����UTF-8,ASCII��7λ����,����һ���ֽڴ�,���λ���Ϊ0,o0xxxxxxx
+		if ((chr & 0x80) != 0) // 判断是否ASCII编码,如果不是,说明有可能是UTF-8,ASCII用7位编码,但用一个字节存,最高位标记为0,o0xxxxxxx
 			bAllAscii = FALSE;
-		if (nBytes == 0) //�������ASCII��,Ӧ���Ƕ��ֽڷ�,�����ֽ���
+		if (nBytes == 0) //如果不是ASCII码,应该是多字节符,计算字节数
 		{
 			if (chr >= 0x80)
 			{
@@ -36,7 +36,7 @@ int IsTextUTF8(const char* str, ULONGLONG length)
 				nBytes--;
 			}
 		}
-		else //���ֽڷ��ķ����ֽ�,ӦΪ 10xxxxxx
+		else //多字节符的非首字节,应为 10xxxxxx
 		{
 			if ((chr & 0xC0) != 0x80)
 			{
@@ -45,11 +45,11 @@ int IsTextUTF8(const char* str, ULONGLONG length)
 			nBytes--;
 		}
 	}
-	if (nBytes > 0) //Υ������
+	if (nBytes > 0) //违返规则
 	{
 		return FALSE;
 	}
-	if (bAllAscii) //���ȫ������ASCII, ˵������UTF-8
+	if (bAllAscii) //如果全部都是ASCII, 说明不是UTF-8
 	{
 		return FALSE;
 	}
@@ -137,15 +137,15 @@ const char* ReadBOM(const char* p, bool* bom)
 	return p;
 }
 
-const char* SkipWhiteSpace(const char* p)
-{
-	XASSERT(p);
-	while (IsWhiteSpace(*p)) {
-		++p;
-	}
-	XASSERT(p);
-	return p;
-}
+//const char* SkipWhiteSpace(const char* p)
+//{
+//	XASSERT(p);
+//	while (IsWhiteSpace(*p)) {
+//		++p;
+//	}
+//	XASSERT(p);
+//	return p;
+//}
 
 
 
