@@ -27,6 +27,9 @@
 
 using namespace std;
 
+typedef unsigned char uchar;
+
+class XTextFile;
 
 
 class XString
@@ -154,15 +157,29 @@ public:
 	*/
 	static size_t TrimSpaceLeft(std::string& str)
 	{
-		size_t i = 0;
-		for (; i < str.length(); i++)
+		size_t k = 0;
+		//string::iterator i;
+		//for (i = str.begin(); i != str.end(); i++) {
+		//	if (!::isspace(*i)) {
+		//		break;
+		//	}
+		//	k++;
+		//}
+		//if (i == str.end()) {
+		//	str.clear();
+		//}
+		//else {
+		//	if(i!=str.begin()) str.erase(str.begin(), i);
+		//}
+		string ch;
+		for (size_t i = 0; i < str.length(); i++)
 		{
-			char ch = str[i];
-			if (ch == ' ') continue;
+			ch = str.substr(i, 1);
+			if (ch.compare(" ") == 0) { k++;continue; }
 			break;
 		}
-		if (i>0) str.erase(0, i);
-		return i;
+		if(k>0) str.erase(0, k);
+		return k;
 	}
 
 	/**
@@ -170,20 +187,36 @@ public:
 	*/
 	static size_t TrimSpaceRight(std::string& str)
 	{
-		size_t l = str.length();
-		size_t i = str.length();
-		for (; i <=0 ; i--)
+		size_t k = 0;
+		//string::iterator i;
+		//for (i = str.end() - 1; ; i--) {
+		//	if (!isspace(*i)) {
+		//		if(i+1!=str.end()) str.erase(i + 1, str.end());
+		//		break;
+		//	}
+		//	k++;
+		//	if (i == str.begin()) {
+		//		str.clear();
+		//		break;
+		//	}
+		//}
+		string ch;
+		size_t i = str.length() - 1;
+		for (; i >=0; i--)
 		{
-			char ch = str[i];
-			if (ch == ' ') continue;
+			ch = str.substr(i, 1);
+			if (ch.compare(" ") == 0) {
+				k++; continue; 
+			}
 			break;
 		}
-		if (i<(l-1)) str.erase(str.begin()+i+1,str.end());
-		return l - str.length();
+		if(k>0) str.erase(i+1);
+		return k;
 	}
 
 	static size_t TrimSpaceLeftAndRight(std::string& str)
 	{
+		//return 0;
 		return TrimSpaceLeft(str) + TrimSpaceRight(str);
 	}
 
@@ -204,12 +237,14 @@ void test_xto_sting();
 class XStringList
 {
 public:
-    struct ABM
+/*  
+	struct ABM
     {
         size_t a,b;
         size_t size(){return b-a;}
     };
-    vector<ABM> lines;
+*/
+    vector<size_t> lines;
     
     string m_dat; //内容存储
     
@@ -218,7 +253,11 @@ public:
     virtual ~XStringList(){}
 
 protected:
-	void ParseString(const char* _spchar = "\r\n", const char _close = '"');
+
+	const char* m_xendl;
+	const char* m_xclose;
+
+	void ParseString(const char* _spchar = "\r\n", const char* _close = "\"");
 
 public:
     
@@ -231,7 +270,7 @@ public:
     /*
      _close 如果遇到这个符号 分割符号将被跳过，直到遇到第二个分割符号
      */
-    size_t ParseEx2(const char* lpBuf,size_t lpBufSize=0,const char* _spchar="\r\n", const char _close='"');
+    size_t ParseEx2(const char* lpBuf,size_t lpBufSize=0,const char* _spchar="\r\n", const char* _close="\"");
     
 public:    
     void FixABSpace();//删除前后的空格
@@ -255,7 +294,7 @@ public:
     size_t size();
     
     size_t LoadFromFile(const char* fname);
-    size_t LoadFromString(string src,const char* lineMark="\r\n ",const char _closeMark='"');
+    size_t LoadFromString(string src,const char* lineMark="\r\n",const char* _closeMark="\"");
 
     virtual string operator[](size_t idx);
     string at(size_t idx);
@@ -352,13 +391,17 @@ protected:
 public:
 	static std::string GetValue(std::string filename,std::string keyname);
 
-	void LoadFromFile(std::string filename);
+	void LoadFromAsciiFile(std::string filename);
 	void Parse(const char* _lpBuf, size_t _size);
 
 	std::string GetValue(std::string keyname);
+	std::wstring GetValueWString(std::string keyname);
+
 	bool IsExist(std::string keyname);
 
 	void Print();
+
+	void LoadFile(const char* filename);
 
 };
 
@@ -371,5 +414,40 @@ namespace XStringUtil
 };
 
 
+class XTextFile
+{
+protected:
+	uchar* dat;
+	size_t		len;
+
+public:
+	static FILE* callfopen(const char* filepath, const char* mode)
+	{
+		assert(filepath);
+		assert(mode);
+#if defined(_MSC_VER) && (_MSC_VER >= 1400 ) && (!defined WINCE)
+		FILE* fp = 0;
+		errno_t err = fopen_s(&fp, filepath, mode);
+		if (err) {
+			return 0;
+		}
+#else
+		FILE* fp = fopen(filepath, mode);
+#endif
+		return fp;
+	}
+
+public:
+	XTextFile();
+	virtual ~XTextFile();
+
+	bool LoadFile(const char* filename);
+	int LoadFile(FILE*);
+
+	//operator std::string();
+	const char* c_str() { return (const char*)dat; };
+	size_t size() { return len; };
+
+};
 
 #endif

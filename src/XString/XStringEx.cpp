@@ -20,6 +20,8 @@
 #include <stdarg.h>
 #include <stdint.h>
 
+#include "utf8util.h"
+
 using namespace std;
 
 //
@@ -72,80 +74,55 @@ void test_xto_sting()
 }
 
 
-void XStringList::ParseString(const char* _spchar /*= "\r\n"*/, const char _close /*= '"'*/)
+void XStringList::ParseString(const char* _spchar /*= "\r\n"*/, const char* _close /*= '"'*/)
 {
-	ABM abm;
+	if (m_dat.empty()) return;
+
+	if (_spchar == NULL) _spchar = "\r\n";
+	if (_close == NULL) _close = "\"";
+
+	m_xendl = _spchar;
+	m_xclose = _close;
+
+//	ABM abm;
 	lines.clear();
 	//    aryString.clear();
 
-	size_t lpBufSize = m_dat.length();
+//	size_t lpBufSize = m_dat.length();
+	const char* p = m_dat.c_str();
+//	const char* e = m_dat.c_str() + m_dat.length();
 
-	string sp = _spchar;
-	//	size_t p=0;
-	char c = 0;
-	bool spl = false;
-	string lsi;
+//	const char* c = NULL;// strstr(p, _close);
+//	const char* l = NULL;// strstr(p, _spchar);
 
-	abm.a = 0;
-	abm.b = 0;
+	//if (l < c) {
 
+	//}
 
+//	std::string s1;
+	size_t _el = strlen(_spchar);
+	size_t _cl = strlen(_close);
 
-	for (size_t i = 0; i < lpBufSize; i++)
+//	std::string::size_type pos = 0,pos1=0,pos_e=0;
+//	size_t lpos = 0;
+
+//	pos = m_dat.find("\r\n");
+
+	bool c_mark = false;
+
+	for (size_t i = 0; i < m_dat.length(); i++)
 	{
-		c = m_dat[i];
-
-		//是分割符
-		if (c == _close)
-		{
-			//if (lsi.length()>0)
-			if (abm.a != abm.b)
-			{
-				//aryString.push_back(lsi);
-				//lsi.clear();
-				abm.b = i;
-				lines.push_back(abm);
-				abm.a = i + 1;
-			}
-			spl = !spl;
+		const char* cc = strstr(p + i, _close);
+		if (cc == p + i) c_mark = !c_mark;
+		const char* ll = strstr(p + i, _spchar);
+		if (ll == p + i && !c_mark) {
+			lines.push_back(i+ _el);
+			i += _el;
 		}
-
-		//存在分割符还没闭合
-		if (spl)
-		{
-			abm.b++;//lsi.push_back(c);
-			continue;
+		if (ll == NULL && i != m_dat.length()) {
+			lines.push_back(m_dat.length());
+			break;
 		}
-
-		//是不是分行符
-		if (sp.find(c) != std::string::npos)
-		{
-
-			//            if (abm.a!=abm.b)
-			if (abm.size() > 0)
-			{
-				abm.b = i;
-				lines.push_back(abm);
-				//                aryString.push_back(lsi);
-				//                lsi.clear();
-
-			}
-			//abm.b++;
-			//            abm.a++;
-			abm.a = i + 1;
-			abm.b = abm.a;
-			continue;
-		}
-		else{
-			abm.b++;//lsi.push_back(c);
-		}
-
-	}
-
-	//    if (lsi.length()>0) aryString.push_back(lsi);
-	if (abm.a != abm.b){
-		abm.b++;
-		lines.push_back(abm);
 	}
 
 }
@@ -186,7 +163,7 @@ size_t XStringList::ParseEx(const char* lpBuf,size_t lpBufSize,const char* _spch
 }
 */
 
-size_t XStringList::ParseEx2(const char* lpBuf,size_t lpBufSize,const char* _spchar, const char _close)
+size_t XStringList::ParseEx2(const char* lpBuf,size_t lpBufSize,const char* _spchar, const char* _close)
 {
 	if (lpBufSize<1) lpBufSize = strlen(lpBuf);
     
@@ -202,6 +179,7 @@ size_t XStringList::ParseEx2(const char* lpBuf,size_t lpBufSize,const char* _spc
 //删除前后的空格
 void XStringList::FixABSpace()
 {
+/*
     char c=0;
     ABM abm;
     for (size_t i=0; i<lines.size(); i++) {
@@ -219,12 +197,22 @@ void XStringList::FixABSpace()
             else break;
         }        
     }
+*/
 }
 
-size_t XStringList::LoadFromString(string src,const char* lineMark,const char _closeMark)
+size_t XStringList::LoadFromString(string src,const char* lineMark,const char* _closeMark)
 {
     ParseEx2(src.c_str(),src.length(),lineMark,_closeMark);
     FixABSpace();
+
+#if(0)
+	for (size_t i = 0; i < lines.size(); i++)
+	{
+		string s = at(i);
+		cout << i << " => "<<  s << endl;
+	}
+//	getchar();
+#endif
     return lines.size();
 }
 
@@ -327,11 +315,12 @@ size_t XStringList::size()
 
 void XStringList::push_back(string str)
 {
-	ABM abm;
-	abm.a = m_dat.size();
-	abm.b = str.length()+abm.a;
-	lines.push_back(abm);
+	//ABM abm;
+	//abm.a = m_dat.size();
+	//abm.b = str.length()+abm.a;
+	//lines.push_back(abm);
 	m_dat.append(str);
+	lines.push_back(m_dat.length());
 }
 
 size_t XStringList::LoadFromFile(const char* fname)
@@ -364,10 +353,20 @@ size_t XStringList::LoadFromFile(const char* fname)
 
 string XStringList::operator[](size_t idx)
 {
-    string res;
+	size_t _s = 0;
+	string res;
+//	size_t _ll = 0;
+//	if(m_xendl) _ll= strlen(m_xendl);
     if (idx<size()){
-        ABM abm=lines[idx];
-        res=m_dat.substr(abm.a,abm.size());
+		if (idx > 0) _s = lines[idx - 1];
+		size_t _e= lines[idx];
+        res=m_dat.substr(_s,_e-_s);
+		if (m_xendl) {
+			std::string::size_type pos = res.find(m_xendl);
+			if (pos != std::string::npos) {
+				res.erase(pos);
+			}
+		}
     }
     return res;
 }
@@ -388,7 +387,7 @@ XTokenizer::XTokenizer(const std::string& _str, const std::string& _delim)
 
 	string _dat = _str;
 	_dat = TokenClear(_dat, " \r\n");
-	ParseEx2(_dat.c_str(), _dat.length(), _delim.c_str(), '"');
+	ParseEx2(_dat.c_str(), _dat.length(), _delim.c_str(), "\"");
 }
 
 XTokenizer::XTokenizer(const char* _str, std::size_t sz,const std::string& _delim)
@@ -399,7 +398,7 @@ XTokenizer::XTokenizer(const char* _str, std::size_t sz,const std::string& _deli
 	string _dat = m_dat;
 	_dat = TokenClear(_dat, " \r\n");
 //	printf("%s",_dat.c_str());
-	ParseEx2(_dat.c_str(), _dat.length(), _delim.c_str(), '"');
+	ParseEx2(_dat.c_str(), _dat.length(), _delim.c_str(), "\"");
 }
 
 /*
@@ -693,7 +692,7 @@ void test_XTokenizer()
 ////////////////////////////////////////////////////////////////////////////////
 //
 ////////////////////////////////////////////////////////////////////////////////
-void XTextParamList::LoadFromFile(std::string filename)
+void XTextParamList::LoadFromAsciiFile(std::string filename)
 {
 
 	string str;
@@ -737,6 +736,12 @@ std::string XTextParamList::GetValue(std::string keyname)
 	return valueMap[keyname];
 }
 
+std::wstring XTextParamList::GetValueWString(std::string keyname)
+{
+	//std::string s1 = valueMap[keyname];
+	return utf8util::s2ws(valueMap[keyname]);
+}
+
 bool XTextParamList::IsExist(std::string keyname)
 {
 	return (valueMap.find(keyname) != valueMap.end());
@@ -744,15 +749,54 @@ bool XTextParamList::IsExist(std::string keyname)
 
 void XTextParamList::Print()
 {
+	size_t k = 0;
 	for (auto it = valueMap.begin(); it != valueMap.end(); it++)
 	{
-		cout << it->first << " = " << it->second << endl;
+		cout << k << "=>" << it->first << "=[" << it->second  << "]"<< endl;
+		k++;
 	}
+}
+
+void XTextParamList::LoadFile(const char * filename)
+{
+	wstring ws1;
+	string s1;
+	size_t _start = 0;
+	bool _writeBOM = false;
+	XTextFile txtfile;
+	txtfile.LoadFile(filename);
+	char* p = (char*)txtfile.c_str();
+	p = utf8util::SkipWhiteSpace(p);
+	p = const_cast<char*>(utf8util::ReadBOM(p, &_writeBOM));
+	if (!*p) {
+		//SetError(XML_ERROR_EMPTY_DOCUMENT, 0, 0);
+		return;
+	}
+	_start = p - txtfile.c_str();
+
+	//开始分析
+	if (_writeBOM) {
+		size_t len = utf8::distance(txtfile.c_str(), txtfile.c_str() + txtfile.size());
+		//size_t len = utf8::distance((const char*)p, txtfile.c_str() + txtfile.size()-_start);
+		ws1.resize(len);
+		if (len)
+			utf8::utf8to16(txtfile.c_str(), txtfile.c_str() + txtfile.size(),
+				&ws1[0]);
+		ws1.erase(0, 1);
+		s1 = utf8util::ws2s(ws1);
+	}
+	else {
+		s1.append(txtfile.c_str(), txtfile.size());
+	}
+
+	Parse(s1.c_str(), s1.length());
+
 }
 
 void XTextParamList::ParseLine(std::string line)
 {
 	//第一个字母除空格外如果是 # 直接退出
+/*	
 	for (size_t i = 0; i < line.length(); i++)
 	{
 		char ch = line[i];
@@ -760,6 +804,16 @@ void XTextParamList::ParseLine(std::string line)
 		if (ch == '#') return;
 		break;
 	}
+*/
+	string ch;
+	for (size_t i = 0; i < line.length(); i++)
+	{
+		ch = line.substr(i,1);// line[i];
+		if (ch.compare(" ")==0) continue; //if (::isspace(int(ch))) continue;
+		if (ch.compare("#")==0) return;
+		break;
+	}
+
 
 	//找到第一个 =
 	std::string::size_type pos = line.find('=');
@@ -781,7 +835,7 @@ void XTextParamList::ParseLine(std::string line)
 std::string XTextParamList::GetValue(std::string filename, std::string keyname)
 {
 	XTextParamList tpl;
-	tpl.LoadFromFile(filename);
+	tpl.LoadFromAsciiFile(filename);
 	return tpl.GetValue(keyname);
 }
 
@@ -950,5 +1004,63 @@ namespace XStringUtil
 	}
 };
 
+//////////////////////////////////////////////////////////////////////////
+// XTextFile
+//////////////////////////////////////////////////////////////////////////
 
+XTextFile::XTextFile()
+	:dat(0)
+	,len(0)
+{
+}
+
+XTextFile::~XTextFile()
+{
+	if (dat) delete[] dat;
+}
+
+bool XTextFile::LoadFile(const char * filename)
+{
+	if (filename == NULL) return false;
+
+	FILE* fp = callfopen(filename, "rb");
+	if (!fp) {
+		//SetError(XML_ERROR_FILE_NOT_FOUND, filename, 0);
+		return false;
+	}
+	LoadFile(fp);
+	fclose(fp);
+
+	return true;
+}
+
+int XTextFile::LoadFile(FILE * fp)
+{
+	fseek(fp, 0, SEEK_SET);
+	if (fgetc(fp) == EOF && ferror(fp) != 0) {
+//		SetError(XML_ERROR_FILE_READ_ERROR, 0, 0);
+		return -2;
+	}
+
+	fseek(fp, 0, SEEK_END);
+	const long filelength = ftell(fp);
+	fseek(fp, 0, SEEK_SET);
+	if (filelength == -1L) {
+		//SetError(XML_ERROR_FILE_READ_ERROR, 0, 0);
+		return -3;
+	}
+	assert(filelength >= 0);
+
+	dat = new uchar[filelength + 1];
+	dat[filelength] = 0;
+
+	size_t read = fread(dat, 1, filelength, fp);
+	if (read != filelength) {
+		//SetError(XML_ERROR_FILE_READ_ERROR, 0, 0);
+		return -4;
+	}
+	len = filelength;
+
+	return 0;
+}
 

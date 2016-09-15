@@ -854,11 +854,8 @@ namespace utf8util
 	int IsTextUTF8(const char* str, ULONGLONG length);
 
 
-
 	bool Utf8toWStr(const std::string& utf8str, std::wstring& wstr);
-
 	size_t utf8length(std::string& utf8str);
-
 	bool WStrToUtf8(std::wstring wstr, std::string& utf8str);
 
 	inline static bool IsUTF8Continuation(char p) {
@@ -885,7 +882,8 @@ namespace utf8util
 		return const_cast<char*>(SkipWhiteSpace(const_cast<const char*>(p)));
 	}
 
-
+	std::wstring s2ws(const std::string& s, char const* _Locale="zh-CN");
+	std::string ws2s(const std::wstring& ws, char const* _Locale = "zh-CN");
 
 };
 
