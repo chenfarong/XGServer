@@ -136,6 +136,18 @@ std::wstring s2ws(const std::string& s)
 	return result;
 }
 
+//////////////////////////////////////////////////////////////////////////
+//
+//////////////////////////////////////////////////////////////////////////
+
+
+//CxVarField::~CxVarField()
+//{
+//	if (value) delete value;
+//	value = NULL;
+//}
+
+
 
 //////////////////////////////////////////////////////////////////////////
 //
@@ -1284,6 +1296,7 @@ std::istream & operator >> (std::istream & _iss, CxVar & _var)
 
 
 
+
 CxVar::operator int8_t(){ return i8; }
 CxVar::operator int16_t(){ return i16; }
 CxVar::operator int32_t() { return i32; }
@@ -1303,6 +1316,8 @@ CxVar::operator std::string()
 {
 	return *s;
 }
+
+
 
 CxVar::operator std::wstring()
 {
@@ -1547,4 +1562,95 @@ size_t CxVarHelper::GetSaveSize(CxVarList * _src)
 //	return var.ToString();
 //}
 
+
+
+//////////////////////////////////////////////////////////////////////////
+//
+//////////////////////////////////////////////////////////////////////////
+
+CxAttribute::~CxAttribute()
+{
+	clear();
+}
+
+CxVar * CxAttribute::operator[](const std::string & kname)
+{
+	auto it = cnt.find(kname);
+	if (it != cnt.end()) return it->second.value;
+	return NULL;
+}
+
+void CxAttribute::Assign(const std::string & kname, CxVar * _var)
+{
+	CxVar* _v = operator[](kname);
+	if (_v) delete _v;
+	cnt[kname] = CxVarField(_var);
+}
+
+bool CxAttribute::erase(const std::string & kname)
+{
+	auto it = cnt.find(kname);
+	if (it != cnt.end()) {
+		if(it->second.value) delete it->second.value;
+		cnt.erase(it);
+		return true;
+	}
+	return false;
+}
+
+void CxAttribute::clear()
+{
+	while (!cnt.empty())
+	{
+		auto it = cnt.begin();
+		if (it->second.value) delete it->second.value;
+		cnt.erase(it);
+	}
+}
+
+
+std::ostream & operator<<(std::ostream & oss, const CxAttribute & attr)
+{
+	return oss << attr.cnt;
+}
+
+std::istream & operator >> (std::istream & iss, CxAttribute & attr)
+{
+	return iss >> attr.cnt;
+}
+
+std::string CxAttribute::ToString()
+{
+	return CxVarHelper::ToString(cnt);
+}
+
+void CxAttribute::LoadFromFile(std::string fname)
+{
+	CxVarHelper::LoadFromFile(cnt, fname);
+}
+
+void CxAttribute::SaveToFile(std::string fname)
+{
+	CxVarHelper::SaveToFile(cnt, fname);
+}
+
+void CxAttribute::LoadStructFromXmlFile(std::string fname)
+{
+	CxVarHelper::StructLoadFromXml(cnt, fname.c_str());
+}
+
+void CxAttribute::LoadDataFromXmlElement(tinyxml2::XMLElement* elm)
+{
+	CxVarHelper::DataLoadFromXml(cnt, elm);
+}
+
+void CxAttribute::CopyValueFrom(const CxAttribute & _Right)
+{
+	CxVarHelper::CxVarMapCopyValue(cnt, _Right.cnt);
+}
+
+CxAttribute::operator std::string()
+{
+	return CxVarHelper::ToString(cnt);
+}
 

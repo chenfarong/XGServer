@@ -118,7 +118,7 @@ typedef std::list<CxVar*>::iterator  CxVarListIterator;
 
 typedef std::map<std::string, CxVarField> CxVarFieldMap;
 
-
+class CxAttribute;
 
 
 struct CxVarBox
@@ -191,6 +191,16 @@ struct CxVarField
 {
 	CxVar* value;
 	CxVarFlag flag;
+	
+	CxVarField() {
+		value = NULL;
+	}
+
+	CxVarField(CxVar* v) {
+		value = v;
+	}
+
+//	virtual ~CxVarField();
 };
 
 
@@ -425,6 +435,12 @@ public:
 
 
 
+
+
+//////////////////////////////////////////////////////////////////////////
+//
+//////////////////////////////////////////////////////////////////////////
+
 template<class _Ch, class _Tr>
 std::basic_istream<_Ch, _Tr>& operator >> (std::basic_istream<_Ch, _Tr>& _iss, CxVarFieldMap& _var)
 {
@@ -574,6 +590,20 @@ public:
 		}
 	}
 
+	/**
+	删除其中一个item
+	*/
+	static bool VarMapErase(CxVarFieldMap& _src, std::string kname) {
+		 auto it= _src.find(kname);
+		 if (it != _src.end()) {
+			 if (it->second.value) delete it->second.value;
+			 _src.erase(it);
+			 return true;
+		 }
+		 return false;
+	}
+
+
 
 	static void CxVarFieldMapAdd(CxVarFieldMap& _src, std::string kname, CxVar* var)
 	{
@@ -585,7 +615,7 @@ public:
 	static size_t GetSaveSize(CxVarList* _src);
 
 
-	static void CxVarMapCopyValue(CxVarFieldMap& des, CxVarFieldMap& src)
+	static void CxVarMapCopyValue(CxVarFieldMap& des, const CxVarFieldMap& src)
 	{
 		for (auto it=src.begin();it!=src.end();it++)
 		{
@@ -636,16 +666,45 @@ public:
 
 namespace CxVarUtil
 {
+
+
 	template<typename T>
 	int CxVarMapValueSet(CxVarFieldMap& _src, std::string _name, T _val)
 	{
 		//TODO 名字支持 :: 分割
 
-		CxVar* v = _src[keyname].value;
-		if (v == NULL) return -1;
-		*v = _val;
+		auto it = _src.find(_name);
+		if (it == _src.end()) return -1;
+
+		CxVar* v = it->second.value;
+
+		if (v == NULL) it->second.value=new CxVar(_val);
+		else *v = _val;
+
 		return 0;
 	}
+
+	template<typename T>
+	int CxVarMapValueSetForce(CxVarFieldMap& _src, std::string _name, T _val)
+	{
+		//TODO 名字支持 :: 分割
+
+		auto it = _src.find(_name);
+		if (it == _src.end()) {
+			_src[_name] = CxVarField(new CxVar(_val));
+			return 0;
+		}
+
+		CxVar* v = it->second.value;
+
+		if (v == NULL) it->second.value = new CxVar(_val);
+		else *v = _val;
+
+		return 0;
+	}
+
+
+//	bool CxVarMapValueSetString(CxVarFieldMap& _src, std::string _name, std::string _val)
 
 
 	template<typename T>
@@ -696,6 +755,102 @@ namespace CxVarUtil
 std::string ws2s(const std::wstring& ws);
 std::wstring s2ws(const std::string& s);
 
+
+
+//////////////////////////////////////////////////////////////////////////
+//
+//////////////////////////////////////////////////////////////////////////
+
+class CxAttribute
+{
+protected:
+	std::map<std::string, CxVarField> cnt;
+
+public:
+
+	virtual ~CxAttribute();
+
+	CxVar* operator[](const std::string& kname);
+
+	void Assign(const std::string& kname, CxVar* _var);
+
+	bool erase(const std::string& kname);
+
+	void clear();
+
+	template<typename T>
+	inline void SetFieldValue(const std::string& kname, T _value)
+	{
+		auto it = cnt.find(kname);
+		if (it == cnt.end()) {
+			cnt[kname] = CxVarField(new CxVar(_value));
+		}
+		else {
+			*(it->second.value) = _value;
+		}
+	}
+
+	template<typename T>
+	inline bool GetFieldValue(const std::string& kname, T& _result)
+	{
+		auto it = cnt.find(kname);
+		if (it == cnt.end()) {
+			return false;
+		}
+		else {
+			_result = ((T)(*(it->second.value)));
+			return true;
+		}
+	}
+
+
+	template<typename T>
+	inline T GetFieldValueNumber(const std::string& kname)
+	{
+		auto it = cnt.find(kname);
+		if (it == cnt.end()) {
+			return 0;
+		}
+		else {
+			return ((T)(*(it->second.value)));
+		}
+	}
+
+	
+	inline std::string GetFieldValueString(const std::string& kname)
+	{
+		auto it = cnt.find(kname);
+		if (it == cnt.end()) {
+			return "";
+		}
+		else {
+			return ((std::string)(*(it->second.value)));
+		}
+	}
+
+	friend std::ostream &operator<<(std::ostream&, const CxAttribute&);
+	friend std::istream &operator >> (std::istream&, CxAttribute&);
+
+
+	operator std::string();
+
+	std::string ToString();
+
+
+	void LoadFromFile(std::string fname);
+	void SaveToFile(std::string fname);
+
+	void LoadStructFromXmlFile(std::string fname);
+	void LoadDataFromXmlElement(tinyxml2::XMLElement*);
+
+	void CopyValueFrom(const CxAttribute& _Right);
+
+	inline std::map<std::string, CxVarField>& GetContainer() { return cnt; };
+
+};
+
+
+
 #if defined( __GNUC__ )
 #pragma pack()
 #else
@@ -703,7 +858,5 @@ std::wstring s2ws(const std::string& s);
 #endif
 
 #endif // attrib_h__
-
-
 
 
