@@ -1,6 +1,6 @@
 
 This is a game server application for MMORPG,
-and support anything other type internet games.
+and anything other type internet games.
 This project use c/c++ writted.
 
 game logic develop support c/c++ .dll or .so,
