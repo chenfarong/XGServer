@@ -8,4 +8,4 @@
 MMORPG Liux Windows IOCP EPOLL
 
 
-![image](https://github.com/chenfarong/XGServer/images/sarch.png)
+![image](https://github.com/chenfarong/XGServer/blob/master/images/sarch.png)
