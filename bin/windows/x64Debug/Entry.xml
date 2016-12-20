@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+    <!-- 接入服务器 绑定本机所有IP地址  realm_id 游戏区编号 -->
+    <server realm_id="190" ip="192.168.50.190" port="8002" ip2="192.168.50.190"/>
+    <!-- subscriber ip="101.251.243.90" port="20468" / -->
+    <subscriber ip="192.168.50.190" port="20468"/>
+    <database type="MySQL" host="192.168.50.190" port="3306" username="im" password="123456">-host 192.168.50.190 -u im -p 123456</database>
+    <broadcast ip="192.168.50.190" port="190" target="192.168.50.255">-host 192.168.50.255 -port 190</broadcast>
+    <connect init="1024"/>
+    <log enable="yes" file="./log/entry_server.log"/>
+    <plugins>
+        <!-- <p>module/pxEntry.dll</p> -->
+        <p>EToken.dll</p>
+    </plugins>
+</xml>

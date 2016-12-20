@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<scene id="1000" name="战士大本营" >
+<vmap>
+<!-- 出生点 -->
+	<born>
+		<b x="13" y="12" z="31" id="0" radius="12" name="默认出生点" />
+	</born>
+</vmap>
+</scene>

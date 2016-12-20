@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+type=0 普通场景 type=1 副本
+ -->
+<scene id="2000" name="魔法师大本营" type="0" >
+<vmap>
+
+<!-- 地图 -->
+<m navmesh="" name=""  >
+
+<!-- 角色出生点 -->
+	<born>
+		<br radius="12" name="默认出生点-1">
+			<b x="13" y="12" z="31" id="0" />
+			<b x="13" y="12" z="31" id="1" />
+			<b x="13" y="12" z="31" id="2" />
+		</br>
+		
+	</born>
+	
+<!-- 任务NPC -->
+	<npc>
+		<p x="0" y="12" z="31" o="3" id="1000" />
+	</npc>
+	
+<!-- 怪物 -->	
+	<monster>
+		<!--  -->
+		<m id="10"  monster_type= "[100,213]" relive_type="1" interval="4"   >
+		<!-- 怪物出生点 -->
+			<br radius="12" name="16级野猪刷新点" >
+				<b x="13" y="12" z="31" id="0" />
+				<b x="13" y="12" z="31" id="1" />
+				<b x="13" y="12" z="31" id="2" />
+			</br>
+		</m>
+	</monster>
+
+<!-- 物品 例如触发NPC 补偿NPC等 -->	
+	<item>
+		<p x="0" y="12" z="31" o="3"  />
+	</item>
+</m>
+
+<m>
+</m>
+</vmap>
+</scene>

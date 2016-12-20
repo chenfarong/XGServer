@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<object>
+    <properties>
+        <id cn_name="ID" type="uint32" save="1" myself="1" open="1" visible="1"/>
+        <name cn_name="名称" type="string" save="1" myself="1" open="1" visible="1"/>
+        <talk cn_name="默认对话" type="uint32" save="1" myself="1" open="1" visible="1"/>
+        <quality cn_name="品质" type="uint32" save="1" myself="1" open="1" visible="1"/>
+        <modelID cn_name="模型ID" type="uint32" save="1" myself="1" open="1" visible="1"/>
+        <type cn_name="NPC类型" type="uint32" save="1" myself="1" open="1" visible="1"/>
+        <level cn_name="等级" type="uint32" save="1" myself="1" open="1" visible="1"/>
+        <exp cn_name="经验值" type="uint32" save="1" myself="1" open="1" visible="1"/>
+        <dropid cn_name="掉落" type="uint32" save="1" myself="1" open="1" visible="1"/>
+        <mini_atk_p cn_name="物理攻击下限值" type="uint32" save="1" myself="1" open="1" visible="1"/>
+        <max_atk_p cn_name="物理攻击上限值" type="uint32" save="1" myself="1" open="1" visible="1"/>
+        <mini_atk_m cn_name="魔法攻击下限值" type="uint32" save="1" myself="1" open="1" visible="1"/>
+        <max_atk_m cn_name="魔法攻击上限值" type="uint32" save="1" myself="1" open="1" visible="1"/>
+        <defense_p cn_name="物理防御值" type="uint32" save="1" myself="1" open="1" visible="1"/>
+        <defense_m cn_name="法术防御值" type="uint32" save="1" myself="1" open="1" visible="1"/>
+        <hp cn_name="生命上限" type="uint32" save="1" myself="1" open="1" visible="1"/>
+        <magic cn_name="法力上限" type="uint32" save="1" myself="1" open="1" visible="1"/>
+        <hit cn_name="命中" type="uint32" save="1" myself="1" open="1" visible="1"/>
+        <godge cn_name="闪避" type="uint32" save="1" myself="1" open="1" visible="1"/>
+        <crit cn_name="暴击" type="uint32" save="1" myself="1" open="1" visible="1"/>
+        <tenacity cn_name="韧性" type="uint32" save="1" myself="1" open="1" visible="1"/>
+        <crit_damage cn_name="暴伤" type="uint32" save="1" myself="1" open="1" visible="1"/>
+        <speed cn_name="移动速度" type="uint16" save="1" myself="1" open="1" visible="1"/>
+        <move_frequency cn_name="移动间隔" type="uint16" save="1" myself="1" open="1" visible="1"/>
+        <skill cn_name="技能编号" type="uint32" save="1" myself="1" open="1" visible="1"/>
+        <driving cn_name="是否主动攻击" type="int8" save="1" myself="1" open="1" visible="1"/>
+        <atked cn_name="是否可被攻击" type="int8" save="1" myself="1" open="1" visible="1"/>
+        <view_range cn_name="视野范围" type="uint32" save="1" myself="1" open="1" visible="1"/>
+        <activity_range cn_name="活动范围" type="uint32" save="1" myself="1" open="1" visible="1"/>
+        <chase_range cn_name="追击范围" type="uint32" save="1" myself="1" open="1" visible="1"/>
+        <addition_ai cn_name="附加AI编号" type="uint32" save="1" myself="1" open="1" visible="1"/>
+        <owner cn_name="是否有归属权" type="int8" save="1" myself="1" open="1" visible="1"/>
+        <sound cn_name="怪物音效" type="uint32" save="1" myself="1" open="1" visible="1"/>
+        <move_flags cn_name="可移动地形标记" type="uint32" save="1" myself="1" open="1" visible="1"/>
+        <voice1 cn_name="NPC聊天语言1" type="uint32" save="1" myself="1" open="1" visible="1"/>
+        <voice2 cn_name="NPC聊天语言2" type="uint32" save="1" myself="1" open="1" visible="1"/>
+        <scale cn_name="模型倍率" type="float" save="1" myself="1" open="1" visible="1"/>
+    </properties>
+</object>

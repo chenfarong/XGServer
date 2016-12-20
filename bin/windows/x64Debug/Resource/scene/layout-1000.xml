@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<object>
+
+
+<unit>
+<!-- 0 未知 会被丢弃 1=环境NPC 2=普通NPC 3=刷怪点  -->
+<class>1</class>
+<id></id>
+<type>1</type>
+<param_1>11</param_1>
+<param_2>11</param_2>
+<param_3>11</param_3>
+<gps></gps>
+<radius></radius>
+<!-- 脚本的文件名带路径 -->
+<script></script>
+</unit>
+
+
+
+</object>

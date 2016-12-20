@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+    <!-- 接入服务器 绑定本机所有IP地址 -->
+    <server realm_id="190" ip="192.168.50.190" port="6002"/>
+    <!-- subscriber ip="101.251.243.90" port="20468" / -->
+    <subscriber ip="192.168.50.190" port="20468"/>
+    <broadcast ip="192.168.50.190" port="190" target="192.168.50.255">-host 192.168.50.255 -port 190</broadcast>
+    <database type="MySQL" host="192.168.50.190" port="3306" username="im" password="123456">-host 192.168.50.190 -u im -p 123456</database>
+    <connect init="1024"/>
+    <log enable="yes" file="./log/game_server.log"/>
+    <resource>./Resource/</resource>
+    <plugins>
+        <p>myAccount.dll</p>
+    </plugins>
+</xml>

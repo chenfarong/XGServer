@@ -1,0 +1,30 @@
+char add hjx612 1 1 1 1
+
+
+
+char use 16nmy2
+
+
+
+
+
+
+
+
+
+
+login u0007 123456 192.168.50.190 6002
+char add 3612 1 1 1 1
+
+
+
+login u0081 123456 192.168.50.190 6002
+
+
+char more
+task ls
+
+login u0027 123456 192.168.50.190 6002
+connect 192.168.50.190 8002
+char ls
+char use g4zddm

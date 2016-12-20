@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf8"?>
+<!--出生点属性-->
+<object>
+	<!-- 基本属性 -->
+	<properties>
+		<!-- 可视=出现的时候要传送给客户端  保存=写到数据库中 私有=只给自己看   -->
+
+		<monster_id type="string" public="true" private="false" save="true" name="怪物编号" />
+		<relive_cd  type="int8" public="true" private="true" save="true" name="怪物死亡后多少秒后重生 0表示死后不重生 " />		
+		<num_max type="int32"  public="true" private="true" save="true" name="总共刷多少只" />	
+
+	</properties>
+</object>

@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf8"?>
+<!--人物基础属性-->
+<object>
+	<!-- 基本属性 -->
+	<properties>
+		<!-- 可视=出现的时候要传送给客户端  保存=写到数据库中 私有=只给自己看   -->
+
+		<name type="string" public="true" private="false" save="true" name="角色名" />
+		<sex  type="int8" public="true" private="true" save="true" name="性别" description="0为男，1为女"/>		
+		<career  type="int8" public="true" private="true" save="true" name="职业" description="0为战士，1为法师，2为道士"/>
+		<bodymodel  type="int32" public="true" private="false" save="true" name="身体模型" description=""/>
+		<facemodel  type="int32" public="true" private="false" save="true" name="脸部模型" description=""/>
+		<hairmodel  type="int32" public="true" private="false" save="true" name="头发模型" description=""/>
+
+		
+		<!-- 装备效果 87~97 -->
+		<clothes  type="uint32" public="true" private="false" save="true" name="衣服" description=""/>
+		<weapon  type="uint32" public="true" private="false" save="true" name="武器" description=""/>
+		<helmet  type="uint32" public="true" private="false" save="true" name="头盔" description=""/>
+		<sash  type="uint64" public="true" private="false" save="true" name="腰带" description=""/>
+		<boots  type="uint64" public="true" private="false" save="true" name="靴子" description=""/>
+
+		<ring  type="uint32" public="true" private="false" save="true" name="戒子" description=""/>
+		<wrist  type="uint32" public="true" private="false" save="true" name="护腕" description=""/>
+		<necklace  type="uint32" public="true" private="false" save="true" name="项链" description=""/>
+		<glove  type="uint64" public="true" private="false" save="true" name="护手" description=""/>
+		<trousers  type="uint64" public="true" private="false" save="true" name="裤子" description=""/>
+		
+		<mounts  type="uint64" public="true" private="false" save="true" name="坐骑" description=""/>
+		
+		<!-- 人物基础外观可视属性（角色创建时指定，与装备无关） -->
+		<level  type="uint32" public="true" private="false" save="true" name="等级" description=""/>
+		<exp_cur  type="uint32" public="true" private="false" save="true" name="当前经验值" description=""/>
+		<exp_next  type="uint32" public="true" private="false" save="true" name="升级经验值" description=""/>
+		
+		<money_s  type="uint64" public="true" private="false" save="true" name="铜币数量" description=""/>
+		<money_s_p  type="uint64" public="true" private="false" save="true" name="绑铜数量" description=""/>
+		<money_g_p  type="uint64" public="true" private="false" save="true" name="绑定元宝" description=""/>
+		<money_g  type="uint64" public="true" private="false" save="true" name="元宝" description=""/>
+
+		
+		
+		<nation  type="string" public="true" private="false" save="true" name="国家" description=""/>
+		<nation_devote  type="int32" public="true" private="false" save="true" name="国家贡献" description=""/>
+		<nation_title  type="int32" public="true" private="false" save="true" name="国家贡献" description=""/>
+		
+		<guild  type="string" public="true" private="false" save="true" name="帮会" description=""/>
+		<guild_devote  type="int32" public="true" private="false" save="true" name="帮会贡献" description=""/>
+		<guild_title  type="string" public="true" private="false" save="true" name="帮会称谓" description=""/>
+		
+		
+		<title  type="string" public="true" private="false" save="true" name="称号" description=""/>
+		<spouse  type="uint64" public="true" private="false" save="true" name="配偶" description=""/>
+		<pk_votes  type="int32" public="true" private="false" save="true" name="pk值" description=""/>
+		<popularity  type="int32" public="true" private="false" save="true" name="声望" description=""/>
+		<atk_votes  type="int32" public="true" private="false" save="true" name="战斗力数值" description=""/>
+		
+		
+		<hp_cur  type="int32" public="true" private="false" save="true" name="当前体力值" description=""/>
+		<hp_limit  type="int32" public="true" private="false" save="true" name="体力值上限" description=""/>
+		<mp_cur  type="int32" public="true" private="false" save="true" name="当前魔法值" description=""/>
+		<mp_limit  type="int32" public="false" private="true" save="true" name="魔法值上限" description=""/>
+
+		<!-- 30~39 攻击 -->
+		<attack  type="int32" public="true" private="false" save="true" name="攻击" description=""/>
+		<mga  type="int32" public="true" private="false" save="true" name="魔攻" description=""/>
+		<shield  type="int32" public="true" private="false" save="true" name="防御" description=""/>
+		<def  type="int32" public="false" private="true" save="true" name="魔防" description=""/>
+		<hit  type="int32" public="true" private="false" save="true" name="命中" description=""/>
+		<parry  type="int32" public="true" private="false" save="true" name="闪避" description=""/>
+		<power  type="int32" public="true" private="false" save="true" name="力量" description=""/>
+		<agile  type="int32" public="false" private="true" save="true" name="敏捷" description=""/>	
+		<intelligence  type="int32" public="false" private="true" save="true" name="智力" description=""/>			
+		<fitness  type="int32" public="false" private="true" save="true" name="体质" description=""/>	
+		
+		<!-- 41~68 -->
+		<hp_cur  type="int32" public="true" private="false" save="true" name="忽视防御" description=""/>
+		<hp_limit  type="int32" public="true" private="false" save="true" name="暴击" description=""/>
+		<mp_cur  type="int32" public="true" private="false" save="true" name="韧性" description=""/>
+		<mp_limit  type="int32" public="false" private="true" save="true" name="暴伤" description=""/>
+		<hp_cur  type="int32" public="true" private="false" save="true" name="命中" description=""/>
+
+		<hp_limit  type="int32" public="true" private="false" save="true" name="闪避" description=""/>
+		<mp_cur  type="int32" public="true" private="false" save="true" name="力量" description=""/>
+		<mp_limit  type="int32" public="false" private="true" save="true" name="敏捷" description=""/>	
+		<mp_limit  type="int32" public="false" private="true" save="true" name="智力" description=""/>			
+		<mp_limit  type="int32" public="false" private="true" save="true" name="智力" description=""/>			
+
+		<hp_cur  type="int32" public="true" private="false" save="true" name="攻击" description=""/>
+		<hp_limit  type="int32" public="true" private="false" save="true" name="魔攻" description=""/>
+		<mp_cur  type="int32" public="true" private="false" save="true" name="防御" description=""/>
+		<mp_limit  type="int32" public="false" private="true" save="true" name="魔防" description=""/>
+		<hp_cur  type="int32" public="true" private="false" save="true" name="命中" description=""/>
+
+		<hp_limit  type="int32" public="true" private="false" save="true" name="闪避" description=""/>
+		<mp_cur  type="int32" public="true" private="false" save="true" name="力量" description=""/>
+		<mp_limit  type="int32" public="false" private="true" save="true" name="敏捷" description=""/>	
+		<mp_limit  type="int32" public="false" private="true" save="true" name="智力" description=""/>			
+		<mp_limit  type="int32" public="false" private="true" save="true" name="智力" description=""/>			
+
+		<!-- 70~85 -->
+		<hp_cur  type="int32" public="true" private="false" save="true" name="麻痹" description=""/>
+		<hp_limit  type="int32" public="true" private="false" save="true" name="减速" description=""/>
+		<mp_cur  type="int32" public="true" private="false" save="true" name="冻结" description=""/>
+		<mp_limit  type="int32" public="false" private="true" save="true" name="眩晕" description=""/>
+		<hp_cur  type="int32" public="true" private="false" save="true" name="中毒" description=""/>
+		<hp_limit  type="int32" public="true" private="false" save="true" name="定身" description=""/>
+		<mp_cur  type="int32" public="true" private="false" save="true" name="击退" description=""/>
+		
+		<hp_cur  type="int32" public="true" private="false" save="true" name="麻痹抗性" description=""/>
+		<hp_limit  type="int32" public="true" private="false" save="true" name="减速抗性" description=""/>
+		<mp_cur  type="int32" public="true" private="false" save="true" name="冻结抗性" description=""/>
+		<mp_limit  type="int32" public="false" private="true" save="true" name="眩晕抗性" description=""/>
+		<hp_cur  type="int32" public="true" private="false" save="true" name="中毒抗性" description=""/>
+		<hp_limit  type="int32" public="true" private="false" save="true" name="定身抗性" description=""/>
+		<mp_cur  type="int32" public="true" private="false" save="true" name="击退抗性" description=""/>
+
+
+		<mp_limit  type="int32" public="false" private="true" save="true" name="其他增益状态" description=""/>
+		<hp_cur  type="int32" public="true" private="false" save="true" name="其他有害状态" description=""/>
+		
+		
+
+	</properties>
+</object>

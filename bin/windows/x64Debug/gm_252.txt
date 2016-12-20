@@ -1,0 +1,28 @@
+login u0081 123456 101.251.243.90 6002;
+char more;
+connect 101.251.243.90 8002;
+char more;
+char ls;
+char use haochao;
+char more;
+char set body_part all 1 2 3 4;
+task ls;
+task enum;
+add exp 100;
+add level 100;
+@ls player;
+@ls npc;
+tree;
+skill use 10 10 10 10;
+!clear;
+!filter connect;
+!filter 连接;
+!filter 用时;
+!dosomething;
+#this is notes;
+#login u0081 123456 192.168.50.252 6002;
+skill ls;
+aaabbbccc;
+obj info 302 4;
+disconnect;
+lll

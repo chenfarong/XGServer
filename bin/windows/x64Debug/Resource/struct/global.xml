@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<object>
+    <properties>
+        <id cn_name="参数ID" type="uint32" save="1" myself="1" open="1" visible="1"/>
+        <remark cn_name="备注" type="string" save="1" myself="1" open="1" visible="1"/>
+        <type cn_name="参数类型  场景对象类型" type="uint32" save="1" myself="1" open="1" visible="1"/>
+        <para1 cn_name="参数1" type="int64" save="1" myself="1" open="1" visible="1"/>
+        <para2 cn_name="参数2" type="int64" save="1" myself="1" open="1" visible="1"/>
+        <coor cn_name="坐标" type="string" save="1" myself="1" open="1" visible="1"/>
+        <radius cn_name="半径" type="float" save="1" myself="1" open="1" visible="1"/>
+        <coor2 cn_name="坐标2" type="string" save="1" myself="1" open="1" visible="1"/>
+    </properties>
+</object>

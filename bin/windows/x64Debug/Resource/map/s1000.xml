@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<vmap left_bottom="0.0,23.00,0.00" right_top="10000.0,23.00,10000.00">
+
+<info ship_enable="0" />
+
+
+ <entities>
+    <!-- rect 范围 origin 位置 num 数量 relive死亡后多长时间复活 -->
+	<entity type="SpawnPoint" rect='{"ox":1,"oy":2,sw:3,sh:4}' origin="{x:24,y:342,z:24}" monster_id="123" num="20" relive="10"  tigger="load" />
+ </entities>
+ 
+</vmap>

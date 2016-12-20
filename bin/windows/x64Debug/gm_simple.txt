@@ -1,0 +1,65 @@
+#-----登录-------;
+login u0081 123456 192.168.50.81 6002;
+connect 192.168.50.81 8002;
+char ls;
+#------选择角色;
+char use 7ut3wy;
+
+#-----增加角色-----;
+char add hjx612 1 1 1 1;
+
+
+
+#----角色相关------;
+char more;
+char set body_part all 1 2 3 4;
+
+#-----任务相关-----;
+task ls;
+task enum;
+task add 1003;
+task cancel 4299262263296;
+task info 1;
+
+#-----GM------;
+set level 23;
+set career 1;
+set exp 123421;
+set hp 11122;
+set pos 2331,2342,421;
+
+add level 1;
+add hp 112;
+
+# kill <obj_tag>;
+kill 1;
+
+
+#--------查看场景对象-----;
+ls;
+tree;
+@ls player;
+@ls npc;
+# char pub <char_guid>;
+char pub ; 
+# more <obj_tag>;
+more ; 
+#obj info <object_guid> <classType>   				//查看对象属性 eg: objInfo 1232 4
+obj info 302 4;
+
+
+#-----技能相关-------;
+skill ls;
+#skill use <skill> <x y z>;
+skill use 12 123 424 512;
+
+#------断开连接-----;
+disconnect;
+
+
+#------其他------;
+!clear;
+!filter connect;
+!filter 连接;
+!filter 用时;
+!dosomething;

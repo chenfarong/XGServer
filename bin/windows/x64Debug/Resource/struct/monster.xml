@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<object>
+    <properties>
+        <id cn_name="id" type="uint32" save="1" myself="1" open="1" visible="1"/>
+        <career cn_name="职业" type="int8" save="1" myself="1" open="1" visible="1"/>
+        <coor_name cn_name="坐标名" type="string" save="1" myself="1" open="1" visible="1"/>
+        <npcid cn_name="NPCID" type="uint32" save="1" myself="1" open="1" visible="1"/>
+        <coor cn_name="地图坐标（x,y,z,o)" type="string" save="1" myself="1" open="1" visible="1"/>
+        <toward cn_name="朝向" type="float" save="1" myself="1" open="1" visible="1"/>
+        <path cn_name="巡逻路径ID" type="uint32" save="1" myself="1" open="1" visible="1"/>
+        <camp cn_name="阵营" type="uint8" save="1" myself="1" open="1" visible="1"/>
+        <rebirth cn_name="复活时间" type="uint32" save="1" myself="1" open="1" visible="1"/>
+        <radius cn_name="刷怪半径" type="float" save="1" myself="1" open="1" visible="1"/>
+        <num cn_name="刷怪数量" type="uint16" save="1" myself="1" open="1" visible="1"/>
+        <script_s cn_name="服务端脚本" type="string" save="1" myself="1" open="1" visible="1"/>
+        <script_c cn_name="客户端脚本" type="string" save="1" myself="1" open="1" visible="1"/>
+        <type cn_name="场景对象类型=3（注意不许改）" type="uint32" save="1" myself="1" open="1" visible="1"/>
+    </properties>
+</object>

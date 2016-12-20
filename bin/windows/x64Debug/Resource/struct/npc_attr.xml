@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<object>
+    <properties>
+        <id cn_name="npcid" type="uint32" save="1" myself="1" open="1" visible="1"/>
+        <real_damage cn_name="伤害加成" type="int32" save="1" myself="1" open="1" visible="1"/>
+        <absorb_p cn_name="物伤吸收" type="int32" save="1" myself="1" open="1" visible="1"/>
+        <absorb_m cn_name="法伤吸收" type="int32" save="1" myself="1" open="1" visible="1"/>
+        <smoking_h cn_name="攻击吸血" type="int32" save="1" myself="1" open="1" visible="1"/>
+        <smoking_m cn_name="攻击吸蓝" type="int32" save="1" myself="1" open="1" visible="1"/>
+        <ignore cn_name="忽视防御" type="int32" save="1" myself="1" open="1" visible="1"/>
+        <luck cn_name="幸运" type="int32" save="1" myself="1" open="1" visible="1"/>
+        <reply cn_name="回春" type="int32" save="1" myself="1" open="1" visible="1"/>
+        <death cn_name="致死" type="int32" save="1" myself="1" open="1" visible="1"/>
+        <benumb_rate cn_name="麻痹概率" type="int32" save="1" myself="1" open="1" visible="1"/>
+        <slow_rate cn_name="减速概率" type="int32" save="1" myself="1" open="1" visible="1"/>
+        <vertigo_rate cn_name="眩晕概率" type="int32" save="1" myself="1" open="1" visible="1"/>
+        <poisoning_rate cn_name="中毒概率" type="int32" save="1" myself="1" open="1" visible="1"/>
+        <freeze_rate cn_name="定身概率" type="int32" save="1" myself="1" open="1" visible="1"/>
+        <res_benumb cn_name="麻痹抗性" type="int32" save="1" myself="1" open="1" visible="1"/>
+        <res_slow cn_name="减速抗性" type="int32" save="1" myself="1" open="1" visible="1"/>
+        <res_vertigo cn_name="眩晕抗性" type="int32" save="1" myself="1" open="1" visible="1"/>
+        <res_poisoning cn_name="中毒抗性" type="int32" save="1" myself="1" open="1" visible="1"/>
+        <res_freeze cn_name="定身抗性" type="int32" save="1" myself="1" open="1" visible="1"/>
+        <recover_h cn_name="每次恢复血量，正负" type="int32" save="1" myself="1" open="1" visible="1"/>
+        <recover_m cn_name="每次恢复蓝量，正负" type="int32" save="1" myself="1" open="1" visible="1"/>
+    </properties>
+</object>

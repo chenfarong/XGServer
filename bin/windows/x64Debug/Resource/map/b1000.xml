@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<vmap left_bottom="" right_top="">
+<!--  0表示无法行走  1不可陆地行走（可以飞行） 2 表示陆地可行走 
+默认用零填充
+ -->
+<land> 
+<br r="1">1,0,1,1,0</br>
+<br>1,0,1,1,0</br>
+<br>1,0,1,1,0</br>
+</land>
+
+<!-- 设定阻挡区域 无法互穿 -->
+<block>
+<br left_bottom="" right_top="" />
+<block>
+
+
+</vmap>

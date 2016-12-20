@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf8"?>
+<!--人物基础属性-->
+<object>
+	<!-- 基本属性 -->
+	<properties>
+		<!-- 可视=出现的时候要传送给客户端  保存=写到数据库中 私有=只给自己看   -->
+
+		<name type="string" public="true" private="false" save="true" name="角色名" />
+		<sex  type="int8" public="true" private="true" save="true" name="性别" description="0为男，1为女"/>		
+		<career  type="int8" public="true" private="true" save="true" name="职业" description="0为战士，1为法师，2为道士"/>
+		<bodymodel  type="int32" public="true" private="false" save="true" name="身体模型" description=""/>
+		<facemodel  type="int32" public="true" private="false" save="true" name="脸部模型" description=""/>
+		<hairmodel  type="int32" public="true" private="false" save="true" name="头发模型" description=""/>
+
+		
+		<!-- 人物基础外观可视属性（角色创建时指定，与装备无关） -->
+		<level  type="uint32" public="true" private="false" save="true" name="等级" description=""/>
+		<exp_cur  type="uint32" public="true" private="false" save="true" name="当前经验值" description=""/>
+		<exp_next  type="uint32" public="true" private="false" save="true" name="升级经验值" description=""/>
+		
+		<money_s  type="uint64" public="true" private="false" save="true" name="铜币数量" description=""/>
+		<money_s_p  type="uint64" public="true" private="false" save="true" name="绑铜数量" description=""/>
+		<money_g_p  type="uint64" public="true" private="false" save="true" name="绑定元宝" description=""/>
+		<money_g  type="uint64" public="true" private="false" save="true" name="元宝" description=""/>
+
+		
+		
+		<nation  type="string" public="true" private="false" save="true" name="国家" description=""/>
+		<nation_devote  type="int32" public="true" private="false" save="true" name="国家贡献" description=""/>
+		<nation_title  type="int32" public="true" private="false" save="true" name="国家贡献" description=""/>
+		
+		<guild  type="string" public="true" private="false" save="true" name="帮会" description=""/>
+		<guild_devote  type="int32" public="true" private="false" save="true" name="帮会贡献" description=""/>
+		<guild_title  type="string" public="true" private="false" save="true" name="帮会称谓" description=""/>
+		
+		
+		<title  type="string" public="true" private="false" save="true" name="称号" description=""/>
+		<spouse  type="uint64" public="true" private="false" save="true" name="配偶" description=""/>
+		<pk_votes  type="int32" public="true" private="false" save="true" name="pk值" description=""/>
+		<popularity  type="int32" public="true" private="false" save="true" name="声望" description=""/>
+		<atk_votes  type="int32" public="true" private="false" save="true" name="战斗力数值" description=""/>
+		
+		
+		<hp_cur  type="int32" public="true" private="false" save="true" name="当前体力值" description=""/>
+		<hp_limit  type="int32" public="true" private="false" save="true" name="体力值上限" description=""/>
+		<mp_cur  type="int32" public="true" private="false" save="true" name="当前魔法值" description=""/>
+		<mp_limit  type="int32" public="false" private="true" save="true" name="魔法值上限" description=""/>
+
+
+	</properties>
+</object>
