@@ -5,6 +5,8 @@
 
 让游戏开发关注在游戏逻辑本身，而不需要关心操作系统，网络通信，内存管理，数据库等。
 
+大世界，多位元。
+
 This is a game server application for MMORPG,
 and anything other type internet games.
 This project use c/c++ writted.
