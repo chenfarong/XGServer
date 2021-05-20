@@ -7,11 +7,11 @@
 
 大世界，多位元。
 
-This is a game server application for MMORPG,
-and anything other type internet games.
+This is a game server application for MMORPG.
 This project use c/c++ writted.
 
-game logic develop support c/c++ .dll or .so,
+game logic develop support c/c++ .dll or .so
+
 
 # 设计理念
    - 敏捷开发
@@ -30,5 +30,13 @@ game logic develop support c/c++ .dll or .so,
   - Windows
   - IOCP
   - EPOLL
+
+## 文件夹说明
+  - engine 引擎目录
+  - plugins 示例插件，公用插件
+  - tools 工具集
+  - oos 运维工具
+  - bin 执行环境
+  - doc 文档
 
 
