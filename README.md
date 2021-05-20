@@ -20,7 +20,7 @@ game logic develop support c/c++ .dll or .so,
 
 # 游戏服务器
   - Websocket，HTTP，NPK协议支持
-  - Json数据
+  - Json，protobuff，...
   - 数据库连接(mongodb)
   
 # 关键字
